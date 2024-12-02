@@ -2,7 +2,7 @@ use std::fs::File;
 use std::io::Read;
 use std::collections::HashMap;
 
-fn parse_input(file_path: &str) -> (Vec<i32>, Vec<i32>) {
+fn parse_input(file_path: &str) -> (Vec<i32>, Vec<i32>) { 
     let mut input = String::new();
     let mut f = File::open(file_path).unwrap();
     f.read_to_string(&mut input).unwrap();
@@ -18,8 +18,8 @@ fn parse_input(file_path: &str) -> (Vec<i32>, Vec<i32>) {
     (v1, v2)
 }
 
-fn part1() -> i32 {
-    let (mut group_one_ids, mut group_two_ids) = parse_input("src/day1/input.txt");
+fn part1(file_path: &str) -> i32 {
+    let (mut group_one_ids, mut group_two_ids) = parse_input(file_path);
 
     group_one_ids.sort();
     group_two_ids.sort();
@@ -33,8 +33,8 @@ fn part1() -> i32 {
     total_distance
 }
 
-fn part2() -> i32 {
-    let (group_one_ids, group_two_ids) = parse_input("src/day1/input.txt");
+fn part2(file_path: &str) -> i32 {
+    let (group_one_ids, group_two_ids) = parse_input(file_path);
 
     let mut similarity_score = 0;
     let mut appearances: HashMap<i32, i32> = HashMap::new();
@@ -56,7 +56,21 @@ fn part2() -> i32 {
 }
 
 fn main() {
-    println!("Total distance: {}", part1());
-    println!("Similarity score : {}", part2());
+    println!("Total distance: {}", part1("src/day1/input.txt"));
+    println!("Similarity score : {}", part2("src/day1/input.txt"));
 }
 
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_part1() {
+        assert_eq!(11, part1("src/day1/test.txt"));
+    }
+
+    #[test]
+    fn test_part2() {
+        assert_eq!(31, part2("src/day1/test.txt"));
+    }
+}
