@@ -63,7 +63,7 @@ fn get_element_distances(elements: &Vec<i32>) -> Vec<i32> {
 }
 
 fn is_slowly_increasing_pd(levels: &Vec<i32>) -> bool {
-    let mut distances = get_element_distances(&levels);
+    let distances = get_element_distances(&levels);
 
     let mut bad_distance_indices: Vec<usize> = Vec::new();
     for i in 0..distances.len() {

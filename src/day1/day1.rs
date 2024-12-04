@@ -27,7 +27,7 @@ fn part1(file_path: &str) -> i32 {
     let mut total_distance = 0;
 
     for i in 0..group_one_ids.len() {
-        let difference = i32::abs(group_one_ids[i] - group_two_ids[i]);
+        let difference = (group_one_ids[i] - group_two_ids[i]).abs();
         total_distance += difference;
     }
     total_distance
