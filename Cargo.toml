@@ -20,10 +20,10 @@ path = "./src/day3/day3.rs"
 name = "day4"
 path = "./src/day4/day4.rs"
 
-# [[bin]]
-# name = "day5"
-# path = "./src/day5/day5.rs"
-# 
+[[bin]]
+name = "day5"
+path = "./src/day5/day5.rs"
+ 
 # [[bin]]
 # name = "day6"
 # path = "./src/day6/day6.rs"
