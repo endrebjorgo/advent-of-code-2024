@@ -29,7 +29,6 @@ fn part1(file_path: &str) -> u64 {
     let mut total_valid = 0;
 
     for (test_value, terms) in input {
-        //println!("{} {:?}", test_value, terms);
         if can_be_true(test_value, terms.as_slice()) {
             total_valid += test_value;
         }
@@ -43,16 +42,18 @@ fn can_be_true(test_value: u64, terms: &[u64]) -> bool {
     }
     let remaining_terms = &terms[0..(terms.len()-1)];
     let last_term = *terms.last().unwrap();
-    let mut result = false;
     
     if test_value % last_term == 0 {
-        result |= can_be_true(test_value / last_term, &remaining_terms);
-        if result { return true; }
+        if can_be_true(test_value / last_term, &remaining_terms) {
+            return true;
+        }
     }
     if test_value > last_term {
-        result |= can_be_true(test_value - last_term, &remaining_terms);
+        if can_be_true(test_value - last_term, &remaining_terms) {
+            return true;
+        }
     }
-    result
+    return false;
 }
 
 fn part2(file_path: &str) -> u64 {
@@ -72,28 +73,29 @@ fn can_be_true_concat(test_value: u64, terms: &[u64]) -> bool {
     if terms.len() == 1 {
         return test_value == terms[0];
     }
-    let remaining_terms = &terms[0..(terms.len()-1)];
     let last_term = *terms.last().unwrap();
+    let remaining = &terms[0..(terms.len()-1)];
     let mut result = false;
 
     let digits = number_of_digits(last_term);
     let divisor = u64::pow(10, digits);
     
     if test_value % divisor == last_term {
-        result |= can_be_true_concat(
-            (test_value - last_term) / divisor,
-            &remaining_terms
-        );
-        if result { return true; }
+        if can_be_true_concat((test_value - last_term) / divisor, &remaining) {
+            return true;
+        }
     }
     if test_value % last_term == 0 {
-        result |= can_be_true_concat(test_value / last_term, &remaining_terms);
-        if result { return true; }
+        if can_be_true_concat(test_value / last_term, &remaining) {
+            return true;
+        }
     }
     if test_value > last_term {
-        result |= can_be_true_concat(test_value - last_term, &remaining_terms);
+        if can_be_true_concat(test_value - last_term, &remaining) {
+            return true;
+        }
     }
-    result
+    return false;
 }
 
 fn number_of_digits(n: u64) -> u32 {
