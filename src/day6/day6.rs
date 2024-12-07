@@ -1,6 +1,7 @@
 use std::fs::File;
 use std::io::Read;
 use std::collections::{HashSet, HashMap};
+use std::time::{Duration, Instant};
 
 #[derive(Default, Debug)]
 struct Map {
@@ -141,8 +142,19 @@ fn contains_loop(map: &mut Map) -> bool {
 }
 
 fn main() {
-    println!("Total squares visited: {}", part1("src/day6/input.txt"));
-    println!("Possible looping obstructions: {}", part2("src/day6/input.txt"));
+    let mut start = Instant::now();
+    println!(
+        "Total squares visited: {} (Duration: {:.2?})",
+        part1("src/day6/input.txt"),
+        start.elapsed()
+    );
+
+    start = Instant::now();
+    println!(
+        "Possible looping obstructions: {} (Duration: {:.2?})",
+        part2("src/day6/input.txt"),
+        start.elapsed()
+    );
 }
 
 #[cfg(test)]
