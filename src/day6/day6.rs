@@ -53,6 +53,11 @@ impl Map {
 
 fn part1(file_path: &str) -> i32 {
     let mut map = Map::from_file(file_path);
+    let visited = get_visited_squares(&mut map);
+    visited.len().try_into().unwrap()
+}
+
+fn get_visited_squares(map: &mut Map) -> HashSet<(usize, usize)> {
     let mut visited: HashSet<(usize, usize)> = HashSet::new();
 
     loop {
@@ -73,65 +78,66 @@ fn part1(file_path: &str) -> i32 {
             map.guard_pos = (new_x as usize, new_y as usize);
         }
     }
-    visited.len().try_into().unwrap()
+    visited
 }
 
 fn part2(file_path: &str) -> i32 {
-    // WARNING: This is really really really slow. Will refactor :)
+    // Still kinda slow...
     let mut map = Map::from_file(file_path);
     let original_pos = map.guard_pos;
     let original_dir = map.guard_dir;
+    let candidates = get_visited_squares(&mut map);
+    let mut total_looping_obstructions = 0;
 
-    let mut loopy_obstructions = 0;
-    let mut combinations = 0;
+    for &square in candidates.iter() {
+        if square == original_pos{ continue; }
 
-    for y in 0..map.height {
-        for x in 0..map.width {
-            map.guard_pos = original_pos;
-            map.guard_dir = original_dir;
+        map.guard_pos = original_pos;
+        map.guard_dir = original_dir;
 
-            // Recording positions visited and the guard's directions there
-            let mut snapshots: HashMap<(usize, usize), Vec<(i32, i32)>> = HashMap::new();
+        map.obstructions.insert(square);
 
-            if map.obstructions.contains(&(x, y)) { continue; }
-            if (x, y) == map.guard_pos { continue; }
-            map.obstructions.insert((x, y));
+        if contains_loop(&mut map) {
+            total_looping_obstructions += 1;
+        }
+        map.obstructions.remove(&square);
+    }
+    total_looping_obstructions
+}
 
-            loop {
-                if let Some(list) = snapshots.get_mut(&map.guard_pos) {
-                    if list.contains(&map.guard_dir) {
-                        loopy_obstructions += 1;
-                        break;
-                    } else {
-                        list.push(map.guard_dir);
-                    }
-                } else {
-                    snapshots.insert(map.guard_pos, vec![map.guard_dir]);
-                }
-                
-                let new_x = map.guard_pos.0 as i32 + map.guard_dir.0;
-                let new_y = map.guard_pos.1 as i32 + map.guard_dir.1;
-                
-                let x_oob = new_x < 0 || new_x >= map.width as i32;
-                let y_oob = new_y < 0 || new_y >= map.height as i32;
+fn contains_loop(map: &mut Map) -> bool {
+    // Recording positions visited twice  and the guard's directions there
+    let mut snapshots: HashMap<(usize, usize), Vec<(i32, i32)>> = HashMap::new();
 
-                if x_oob || y_oob { 
-                    break;
-                } 
-
-                if map.obstructions.contains(&(new_x as usize, new_y as usize)) {
-                    let new_x_dir = -map.guard_dir.1;
-                    let new_y_dir = map.guard_dir.0;
-                    map.guard_dir = (new_x_dir, new_y_dir);
-                } else {
-                    map.guard_pos = (new_x as usize, new_y as usize);
-                }
+    loop {
+        if let Some(list) = snapshots.get_mut(&map.guard_pos) {
+            if list.contains(&map.guard_dir) {
+                return true;
+            } else {
+                list.push(map.guard_dir);
             }
-            combinations += 1;
-            map.obstructions.remove(&(x, y));
+        } else {
+            snapshots.insert(map.guard_pos, vec![map.guard_dir]);
+        }
+        
+        let new_x = map.guard_pos.0 as i32 + map.guard_dir.0;
+        let new_y = map.guard_pos.1 as i32 + map.guard_dir.1;
+        
+        let x_oob = new_x < 0 || new_x >= map.width as i32;
+        let y_oob = new_y < 0 || new_y >= map.height as i32;
+
+        if x_oob || y_oob { 
+            return false;
+        } 
+
+        if map.obstructions.contains(&(new_x as usize, new_y as usize)) {
+            let new_x_dir = -map.guard_dir.1;
+            let new_y_dir = map.guard_dir.0;
+            map.guard_dir = (new_x_dir, new_y_dir);
+        } else {
+            map.guard_pos = (new_x as usize, new_y as usize);
         }
     }
-    loopy_obstructions
 }
 
 fn main() {
