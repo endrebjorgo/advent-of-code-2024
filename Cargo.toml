@@ -28,10 +28,10 @@ path = "./src/day5/day5.rs"
 name = "day6"
 path = "./src/day6/day6.rs"
 
-# [[bin]]
-# name = "day7"
-# path = "./src/day7/day7.rs"
-# 
+[[bin]]
+name = "day7"
+path = "./src/day7/day7.rs"
+ 
 # [[bin]]
 # name = "day8"
 # path = "./src/day8/day8.rs"
