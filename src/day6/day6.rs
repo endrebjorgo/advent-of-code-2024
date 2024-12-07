@@ -107,20 +107,10 @@ fn part2(file_path: &str) -> i32 {
 }
 
 fn contains_loop(map: &mut Map) -> bool {
-    // Recording positions visited twice  and the guard's directions there
+    // Recording positions where a turn has been made and the guard's direction.
     let mut snapshots: HashMap<(usize, usize), Vec<(i32, i32)>> = HashMap::new();
 
     loop {
-        if let Some(list) = snapshots.get_mut(&map.guard_pos) {
-            if list.contains(&map.guard_dir) {
-                return true;
-            } else {
-                list.push(map.guard_dir);
-            }
-        } else {
-            snapshots.insert(map.guard_pos, vec![map.guard_dir]);
-        }
-        
         let new_x = map.guard_pos.0 as i32 + map.guard_dir.0;
         let new_y = map.guard_pos.1 as i32 + map.guard_dir.1;
         
@@ -132,6 +122,16 @@ fn contains_loop(map: &mut Map) -> bool {
         } 
 
         if map.obstructions.contains(&(new_x as usize, new_y as usize)) {
+            if let Some(list) = snapshots.get_mut(&map.guard_pos) {
+                if list.contains(&map.guard_dir) {
+                    return true;
+                } else {
+                    list.push(map.guard_dir);
+                }
+            } else {
+                snapshots.insert(map.guard_pos, vec![map.guard_dir]);
+            }
+
             let new_x_dir = -map.guard_dir.1;
             let new_y_dir = map.guard_dir.0;
             map.guard_dir = (new_x_dir, new_y_dir);
