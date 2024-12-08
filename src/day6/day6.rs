@@ -1,7 +1,7 @@
 use std::fs::File;
 use std::io::Read;
 use std::collections::{HashSet, HashMap};
-use std::time::{Duration, Instant};
+use std::time::Instant;
 
 #[derive(Default, Debug)]
 struct Map {

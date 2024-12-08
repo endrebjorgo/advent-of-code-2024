@@ -1,6 +1,6 @@
 use std::fs::File;
 use std::io::Read;
-use std::time::{Duration, Instant};
+use std::time::Instant;
 
 fn parse_input(file_path: &str) -> Vec<(u64, Vec<u64>)>{
     let mut input = String::new();
@@ -75,7 +75,6 @@ fn can_be_true_concat(test_value: u64, terms: &[u64]) -> bool {
     }
     let last_term = *terms.last().unwrap();
     let remaining = &terms[0..(terms.len()-1)];
-    let mut result = false;
 
     let digits = number_of_digits(last_term);
     let divisor = u64::pow(10, digits);
