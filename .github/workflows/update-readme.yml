@@ -1,0 +1,23 @@
+name: Update README.md
+
+permissions:
+  contents: write
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  update-readme:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set executable permissions
+        run: chmod +x .github/scripts/*.sh
+
+      - name: Run test script
+        run: .github/scripts/test.sh
+        shell: bash
