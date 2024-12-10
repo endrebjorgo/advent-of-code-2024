@@ -56,8 +56,8 @@ fn part2(file_path: &str) -> i32 {
 }
 
 fn main() {
-    println!("Total distance: {}", part1("src/day1/input.txt"));
-    println!("Similarity score : {}", part2("src/day1/input.txt"));
+    println!("Total distance: {}", part1("src/day01/input.txt"));
+    println!("Similarity score : {}", part2("src/day01/input.txt"));
 }
 
 #[cfg(test)]
@@ -66,11 +66,11 @@ mod tests {
 
     #[test]
     fn test_part1() {
-        assert_eq!(11, part1("src/day1/test.txt"));
+        assert_eq!(11, part1("src/day01/test.txt"));
     }
 
     #[test]
     fn test_part2() {
-        assert_eq!(31, part2("src/day1/test.txt"));
+        assert_eq!(31, part2("src/day01/test.txt"));
     }
 }

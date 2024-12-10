@@ -103,8 +103,8 @@ fn is_slowly_increasing_pd(levels: &Vec<i32>) -> bool {
 }
 
 fn main() {
-    println!("Safe reports: {}", part1("src/day2/input.txt"));
-    println!("Safe reports w/ Dampener: {}", part2("src/day2/input.txt"));
+    println!("Safe reports: {}", part1("src/day02/input.txt"));
+    println!("Safe reports w/ Dampener: {}", part2("src/day02/input.txt"));
 }
 
 #[cfg(test)]
@@ -113,12 +113,12 @@ mod tests {
 
     #[test]
     fn test_part1() {
-        assert_eq!(2, part1("src/day2/test.txt"));
+        assert_eq!(2, part1("src/day02/test.txt"));
     }
 
     #[test]
     fn test_part2() {
-        assert_eq!(4, part2("src/day2/test.txt"));
+        assert_eq!(4, part2("src/day02/test.txt"));
     }
 }
 

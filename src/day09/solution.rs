@@ -144,14 +144,14 @@ fn main() {
     let mut start = Instant::now();
     println!(
         "Resulting filesystem checksum: {} (Duration: {:.2?})",
-        part1("src/day9/input.txt"),
+        part1("src/day09/input.txt"),
         start.elapsed()
     );
 
     start = Instant::now();
     println!(
         "Resulting filesystem checksum (chunked): {} (Duration: {:.2?})",
-        part2("src/day9/input.txt"),
+        part2("src/day09/input.txt"),
         start.elapsed()
     );
 }
@@ -162,11 +162,11 @@ mod tests {
 
     #[test]
     fn test_part1() {
-        assert_eq!(1928, part1("src/day9/test.txt"));
+        assert_eq!(1928, part1("src/day09/test.txt"));
     }
 
     #[test]
     fn test_part2() {
-        assert_eq!(2858, part2("src/day9/test.txt"));
+        assert_eq!(2858, part2("src/day09/test.txt"));
     }
 }

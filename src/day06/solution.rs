@@ -145,14 +145,14 @@ fn main() {
     let mut start = Instant::now();
     println!(
         "Total squares visited: {} (Duration: {:.2?})",
-        part1("src/day6/input.txt"),
+        part1("src/day06/input.txt"),
         start.elapsed()
     );
 
     start = Instant::now();
     println!(
         "Possible looping obstructions: {} (Duration: {:.2?})",
-        part2("src/day6/input.txt"),
+        part2("src/day06/input.txt"),
         start.elapsed()
     );
 }
@@ -163,11 +163,11 @@ mod tests {
 
     #[test]
     fn test_part1() {
-       assert_eq!(41, part1("src/day6/test.txt"));
+       assert_eq!(41, part1("src/day06/test.txt"));
     }
 
     #[test]
     fn test_part2() {
-       assert_eq!(6, part2("src/day6/test.txt"));
+       assert_eq!(6, part2("src/day06/test.txt"));
     }
 }

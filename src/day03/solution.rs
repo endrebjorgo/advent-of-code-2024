@@ -116,8 +116,8 @@ fn filter_muls(muls: &Vec<usize>, dos: &Vec<usize>, donts: &Vec<usize>) -> Vec<u
 }
 
 fn main() {
-    println!("Sum of multiplications: {}", part1("src/day3/input.txt"));
-    println!("Sum of enabled multiplications: {}", part2("src/day3/input.txt"));
+    println!("Sum of multiplications: {}", part1("src/day03/input.txt"));
+    println!("Sum of enabled multiplications: {}", part2("src/day03/input.txt"));
 }
 
 #[cfg(test)]
@@ -126,11 +126,11 @@ mod tests {
 
     #[test]
     fn test_part1() {
-        assert_eq!(161, part1("src/day3/test1.txt"));
+        assert_eq!(161, part1("src/day03/test1.txt"));
     }
 
     #[test]
     fn test_part2() {
-        assert_eq!(48, part2("src/day3/test2.txt"));
+        assert_eq!(48, part2("src/day03/test2.txt"));
     }
 }

@@ -120,8 +120,8 @@ fn part2(file_path: &str) -> i32 {
 }
 
 fn main() {
-    println!("Times XMAS appears: {}", part1("src/day4/input.txt"));
-    println!("Times X-MAS appears: {}", part2("src/day4/input.txt"));
+    println!("Times XMAS appears: {}", part1("src/day04/input.txt"));
+    println!("Times X-MAS appears: {}", part2("src/day04/input.txt"));
 }
 
 #[cfg(test)]
@@ -130,11 +130,11 @@ mod tests {
 
     #[test]
     fn test_part1() {
-        assert_eq!(18, part1("src/day4/test1.txt"));
+        assert_eq!(18, part1("src/day04/test1.txt"));
     }
 
     #[test]
     fn test_part2() {
-        assert_eq!(9, part2("src/day4/test2.txt"));
+        assert_eq!(9, part2("src/day04/test2.txt"));
     }
 }

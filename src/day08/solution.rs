@@ -136,14 +136,14 @@ fn main() {
     let mut start = Instant::now();
     println!(
         "Total antinode locations: {} (Duration: {:.2?})",
-        part1("src/day8/input.txt"),
+        part1("src/day08/input.txt"),
         start.elapsed()
     );
 
     start = Instant::now();
     println!(
         "Total antinode locations (new method): {} (Duration: {:.2?})",
-        part2("src/day8/input.txt"),
+        part2("src/day08/input.txt"),
         start.elapsed()
     );
 }
@@ -154,11 +154,11 @@ mod tests {
 
     #[test]
     fn test_part1() {
-        assert_eq!(14, part1("src/day8/test.txt"));
+        assert_eq!(14, part1("src/day08/test.txt"));
     }
 
     #[test]
     fn test_part2() {
-        assert_eq!(34, part2("src/day8/test.txt"));
+        assert_eq!(34, part2("src/day08/test.txt"));
     }
 }

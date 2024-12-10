@@ -118,8 +118,8 @@ fn order_update(update: &mut Vec<i32>, rule_map: &HashMap<i32, Vec<i32>>) {
 }
 
 fn main() {
-    println!("Sum of valid updates: {}", part1("src/day5/input.txt"));
-    println!("Sum of invalid updates (fixed): {}", part2("src/day5/input.txt"));
+    println!("Sum of valid updates: {}", part1("src/day05/input.txt"));
+    println!("Sum of invalid updates (fixed): {}", part2("src/day05/input.txt"));
 }
 
 #[cfg(test)]
@@ -128,11 +128,11 @@ mod tests {
 
     #[test]
     fn test_part1() {
-        assert_eq!(143, part1("src/day5/test.txt")) 
+        assert_eq!(143, part1("src/day05/test.txt")) 
     }
 
     #[test]
     fn test_part2() {
-        assert_eq!(123, part2("src/day5/test.txt")) 
+        assert_eq!(123, part2("src/day05/test.txt")) 
     }
 }

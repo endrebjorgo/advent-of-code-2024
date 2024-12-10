@@ -108,14 +108,14 @@ fn main() {
     let mut start = Instant::now();
     println!(
         "Total calibration result: {} (Duration: {:.2?})", 
-        part1("src/day7/input.txt"), 
+        part1("src/day07/input.txt"), 
         start.elapsed()
     );
 
     start = Instant::now();
     println!(
         "Total calibration result w/ concat: {} (Duration: {:.2?})",
-        part2("src/day7/input.txt"),
+        part2("src/day07/input.txt"),
         start.elapsed() 
     );
 }
@@ -126,11 +126,11 @@ mod tests {
 
     #[test]
     fn test_part1() {
-        assert_eq!(3749, part1("src/day7/test.txt"));
+        assert_eq!(3749, part1("src/day07/test.txt"));
     }
 
     #[test]
     fn test_part2() {
-        assert_eq!(11387, part2("src/day7/test.txt"));
+        assert_eq!(11387, part2("src/day07/test.txt"));
     }
 }
