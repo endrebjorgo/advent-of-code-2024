@@ -40,64 +40,68 @@ path = "./src/day08/solution.rs"
 name = "day09"
 path = "./src/day09/solution.rs"
  
-# [[bin]]
-# name = "day10"
-# path = "./src/day10/day10.rs"
-# 
+[[bin]]
+name = "day10"
+path = "./src/day10/solution.rs"
+ 
 # [[bin]]
 # name = "day11"
-# path = "./src/day11/day11.rs"
+# path = "./src/day11/solution.rs"
 # 
 # [[bin]]
 # name = "day12"
-# path = "./src/day12/day12.rs"
+# path = "./src/day12/solution.rs"
 # 
 # [[bin]]
 # name = "day13"
-# path = "./src/day13/day13.rs"
+# path = "./src/day13/solution.rs"
 # 
 # [[bin]]
 # name = "day14"
-# path = "./src/day14/day14.rs"
+# path = "./src/day14/solution.rs"
 # 
 # [[bin]]
 # name = "day15"
-# path = "./src/day15/day15.rs"
+# path = "./src/day15/solution.rs"
 # 
 # [[bin]]
 # name = "day16"
-# path = "./src/day16/day16.rs"
+# path = "./src/day16/solution.rs"
 # 
 # [[bin]]
 # name = "day17"
-# path = "./src/day17/day17.rs"
+# path = "./src/day17/solution.rs"
 # 
 # [[bin]]
 # name = "day18"
-# path = "./src/day18/day18.rs"
+# path = "./src/day18/solution.rs"
 # 
 # [[bin]]
 # name = "day19"
-# path = "./src/day19/day19.rs"
+# path = "./src/day19/solution.rs"
 # 
 # [[bin]]
 # name = "day20"
-# path = "./src/day20/day20.rs"
+# path = "./src/day20/solution.rs"
 # 
 # [[bin]]
 # name = "day21"
-# path = "./src/day21/day21.rs"
+# path = "./src/day21/solution.rs"
 # 
 # [[bin]]
 # name = "day22"
-# path = "./src/day22/day22.rs"
+# path = "./src/day22/solution.rs"
 # 
 # [[bin]]
 # name = "day23"
-# path = "./src/day23/day23.rs"
+# path = "./src/day23/solution.rs"
 # 
 # [[bin]]
 # name = "day24"
-# path = "./src/day24/day24.rs"
+# path = "./src/day24/solution.rs"
+# 
+# [[bin]]
+# name = "day25"
+# path = "./src/day25/solution.rs"
 
 [dependencies]
