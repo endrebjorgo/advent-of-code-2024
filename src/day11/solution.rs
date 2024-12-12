@@ -90,7 +90,7 @@ fn main() {
     start = Instant::now();
     println!(
         "Total stones after 75 blinks: {} (Duration: {:.2?})",
-        part2("src/day11/test.txt"),
+        part2("src/day11/input.txt"),
         start.elapsed()
     );
 }
