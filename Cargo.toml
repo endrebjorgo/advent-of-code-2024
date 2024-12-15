@@ -52,10 +52,10 @@ path = "./src/day11/solution.rs"
 name = "day12"
 path = "./src/day12/solution.rs"
 
-# [[bin]]
-# name = "day13"
-# path = "./src/day13/solution.rs"
-# 
+[[bin]]
+name = "day13"
+path = "./src/day13/solution.rs"
+
 # [[bin]]
 # name = "day14"
 # path = "./src/day14/solution.rs"
