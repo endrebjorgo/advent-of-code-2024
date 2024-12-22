@@ -1,5 +1,6 @@
 use std::fs::File;
 use std::io::Read;
+use std::collections::HashSet;
 use std::time::Instant;
 
 #[derive(Debug, Default)]
@@ -41,7 +42,7 @@ impl Maze {
         maze
     }
 
-    fn heuristic(&self, pos: (usize, usize)) -> usize {
+    fn heur(&self, pos: (usize, usize)) -> usize {
         let dx = (self.goal.0 as i32 - pos.0 as i32).abs() as usize;
         let dy = (self.goal.1 as i32 - pos.1 as i32).abs() as usize;
         return dx + dy + 2000; // Manhattan distance plus 2 turns
@@ -49,19 +50,14 @@ impl Maze {
 
     fn get_cheapest_path(&self) -> Option<usize> {
         let mut pq: PQueue<((usize, usize), (i32, i32))> = PQueue::new();
-        pq.insert(
-            (self.start_pos, self.start_dir),
-            0,
-            self.heuristic(self.start_pos)
-        );
+        pq.insert((self.start_pos, self.start_dir), self.heur(self.start_pos));
         
-        let mut visited: Vec<((usize, usize), (i32, i32))> = Vec::new();
+        let mut visited: HashSet<((usize, usize), (i32, i32))> = HashSet::new();
 
-        while let Some((e, cost)) = pq.pop() {
-            let curr_pos = e.0;
-            let curr_dir = e.1;
+        while let Some(((curr_pos, curr_dir), f)) = pq.pop() {
+            let curr_cost = f - self.heur(curr_pos);
 
-            if curr_pos == self.goal { return Some(cost); }
+            if curr_pos == self.goal { return Some(curr_cost); }
 
             for x_off in -1..=1 {
                 for y_off in -1..=1 {
@@ -70,27 +66,29 @@ impl Maze {
                     // Should not panic as pos is never on edge
                     let new_x = (curr_pos.0 as i32 + x_off) as usize;
                     let new_y = (curr_pos.1 as i32 + y_off) as usize;
-                    let new_pos = (new_x, new_y);
 
+                    let new_pos = (new_x, new_y);
                     if self.walls.contains(&new_pos) { continue; }
 
                     let new_dir = (x_off, y_off);
+                    if visited.contains(&(new_pos, new_dir)) { continue; }
 
+                    /*
                     let turns = if curr_dir == new_dir { 0 } 
                     else if curr_dir.0 == -new_dir.0 { 2 }
                     else { 1 };
+                    */
 
-                    let new_cost = cost + 1 + turns*1000;
-                    let new_heur = self.heuristic(new_pos);
+                    let turns = match () {
+                        _ if new_dir == curr_dir => 0,
+                        _ if new_dir == (-curr_dir.0, -curr_dir.1) => 2,
+                        _ => 1
+                    };
+
+                    let new_f = curr_cost + 1 + turns*1000 + self.heur(new_pos);
                     
-                    if visited.contains(&(new_pos, new_dir)) { continue; }
-
-                    visited.push((new_pos, new_dir));
-                    pq.insert(
-                        (new_pos, new_dir),
-                        new_cost,
-                        new_heur
-                    );
+                    visited.insert((new_pos, new_dir));
+                    pq.insert((new_pos, new_dir), new_f);
                 }
             } 
         }
@@ -103,45 +101,44 @@ impl Maze {
 #[derive(Debug, Default)]
 struct PQueue<T> {
     es: Vec<T>,
-    gs: Vec<usize>,
-    hs: Vec<usize>,
+    fs: Vec<usize>,
 }
 
 impl<T> PQueue<T> {
     fn new() -> Self {
         Self {
             es: Vec::new(),
-            gs: Vec::new(),
-            hs: Vec::new(),
+            fs: Vec::new(),
         }
     }
 
-    fn insert(&mut self, e: T, g: usize, h: usize) {
+    fn insert(&mut self, e: T, f: usize) {
         for i in 0..self.es.len() {
-            if self.gs[i] + self.hs[i] < g + h {
+            if self.fs[i] < f {
                 self.es.insert(i, e);
-                self.gs.insert(i, g);
-                self.hs.insert(i, h);
+                self.fs.insert(i, f);
                 return;
             }
         }
         self.es.push(e);
-        self.gs.push(g);
-        self.hs.push(h);
+        self.fs.push(f);
     }
 
     fn pop(&mut self) -> Option<(T, usize)> {
         if self.es.len() == 0 { return None; }
         let e = self.es.pop().unwrap();
-        let g = self.gs.pop().unwrap();
-        self.hs.pop();
-        Some((e, g))
+        let f = self.fs.pop().unwrap();
+        Some((e, f))
     }
 }
 
 fn part1(file_path: &str) -> usize {
     let m = Maze::from_file(file_path);
     m.get_cheapest_path().unwrap()
+}
+
+fn part2(file_path: &str) -> usize {
+    return 0;
 }
 
 fn main() {
