@@ -76,10 +76,10 @@ path = "./src/day17/solution.rs"
 name = "day18"
 path = "./src/day18/solution.rs"
  
-# [[bin]]
-# name = "day19"
-# path = "./src/day19/solution.rs"
-# 
+[[bin]]
+name = "day19"
+path = "./src/day19/solution.rs"
+
 # [[bin]]
 # name = "day20"
 # path = "./src/day20/solution.rs"
